@@ -4,9 +4,10 @@
 let svgWidth = 960;
 let svgHeight = 500;
 
+// Margin for SVG graphics
 let margin = {
     top: 20,
-    right: 40,
+    right: 40,``
     bottom: 60,
     left: 100
 };
@@ -23,4 +24,33 @@ let svg = d3.select("#scatter")
 let chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+// Import CSV data using D3
+d3.csv("assets/data/data.csv").then(function (healthData) {
+    
+    // Console.log to test that you have access to data
+    console.log(healthData);
+    
+    // Foreach Loop to get data
+    healthData.forEach(function(data) {
+        // Parse necessary data and cast as numbers
+        data.state = +data.state;
+        data.abbr = +data.abbr;
+        data.poverty = +data.poverty;
+        data.healthcare = +data.healthcare;
+    });
 
+    // Create Scale Functions
+    let xLinearScale = d3.scaleLinear()
+        .domain([20, d3.max(healthData, d => d.poverty)])
+        .range([0, width]);
+    
+    let yLinearScale = d3.scaleLinear()
+        .domain([0, d3.max(healthData, d => healthData.healthcare)])
+        .range([height, 0]);
+
+    // Create Axis Functions
+    let bottomAxis = d3.axisBottom(xLinearScale);
+    let leftAxis = d3.axisLeft(yLinearScale);
+
+// Check out Step 4 of Day 3, Activity 9!
+});
