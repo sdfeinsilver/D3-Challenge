@@ -52,5 +52,14 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
     let bottomAxis = d3.axisBottom(xLinearScale);
     let leftAxis = d3.axisLeft(yLinearScale);
 
-// Check out Step 4 of Day 3, Activity 9!
+    // Append Axes to the chart
+    chartGroup.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(bottomAxis);
+
+    chartGroup.append("g")
+        .call(leftAxis);
+
+    // Create Circles for Scatterplot
+    
 });
