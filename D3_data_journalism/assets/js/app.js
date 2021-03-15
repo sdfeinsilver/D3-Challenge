@@ -7,7 +7,7 @@ let svgHeight = 500;
 // Margin for SVG graphics
 let margin = {
     top: 20,
-    right: 40,``
+    right: 40,
     bottom: 60,
     left: 100
 };
@@ -45,7 +45,7 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         .range([0, width]);
     
     let yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(healthData, d => healthData.healthcare)])
+        .domain([0, d3.max(healthData, d => d.healthcare)])
         .range([height, 0]);
 
     // Create Axis Functions
@@ -61,5 +61,14 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         .call(leftAxis);
 
     // Create Circles for Scatterplot
-    
+    let circlesGroup = chartGroup.selectAll("circle")
+    .data(healthData)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xLinearScale(d.poverty))
+    .attr("cy", d => yLinearScale(d.healthcare))
+    .attr("r", "15")
+    .attr("fill", "pink")
+    .attr("opacity", ".5");
+
 });
