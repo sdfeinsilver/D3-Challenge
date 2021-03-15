@@ -71,4 +71,18 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
     .attr("fill", "pink")
     .attr("opacity", ".5");
 
+    // Create Axes Labels
+    chartGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 40)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .attr("class", "axisText")
+        .text("Healthcare Level");
+    
+    chartGroup.append("text")
+        .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+        .attr("class", "axisText")
+        .text("Poverty Level");
+
 });
