@@ -67,9 +67,9 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
     .append("circle")
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("r", "15")
-    .attr("fill", "pink")
-    .attr("opacity", ".5");
+    .attr("r", "10")
+    .attr("fill", "CadetBlue")
+    .attr("opacity", "1");
 
     // Create Axes Labels
     chartGroup.append("text")
