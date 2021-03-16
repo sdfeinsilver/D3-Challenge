@@ -33,8 +33,8 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
     // Foreach Loop to get data
     healthData.forEach(function(data) {
         // Parse necessary data and cast as numbers
-        data.state = +data.state;
-        data.abbr = +data.abbr;
+        data.state = data.state;
+        data.abbr = data.abbr;
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
     });
@@ -70,46 +70,25 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
     .attr("r", "10")
     .attr("fill", "CadetBlue")
     .attr("opacity", "1");
-
-    // Test Code
-    var stateAbbr = chartGroup.selectAll(null)
-    .data(healthData)
-    .enter().append("text");
-
-  stateAbbr
-    .attr("x", function (d) {
-      return xLinearScale(d.poverty);
-    })
-    .attr("y", function (d) {
-      return yLinearScale(d.healthcare) + 3
-    })
-    .text(function (d) {
-      return d.abbr;
-    })
-    .attr("class", "stateText")
-    .attr("font-size", "9px");
     
+    // Put State Abbreviations inside Scatter Plot points
+    let stateAbbr = chartGroup.selectAll(null)
+        .data(healthData)
+        .enter()
+        .append('text');
     
-    
-    
-    // // Put State Abbreviations inside Scatter Plot points
-    // let stateAbbr = chartGroup.selectAll(null)
-    //     .data(healthData)
-    //     .enter()
-    //     .append('text');
-    
-    // stateAbbr
-    //     .attr('x', function (d) {
-    //         return xLinearScale(d.poverty);
-    //     })
-    //     .attr('y', function(d) {
-    //         return yLinearScale(d.healthcare);
-    //     })
-    //     .text(function (d) {
-    //         return d.abbr;
-    //     })
-    //     .attr("class", "stateAbbrText")
-    //     .attr("font-size", "15px");
+    stateAbbr
+        .attr('x', function (d) {
+            return xLinearScale(d.poverty) - 7;
+        })
+        .attr('y', function(d) {
+            return yLinearScale(d.healthcare) + 3;
+        })
+        .text(function (d) {
+            return d.abbr;
+        })
+        .attr("class", "stateAbbrText")
+        .attr("font-size", "10px");
 
     // Initialize tool tip
     let toolTip = d3.select('body').append('div').classed('tooltip', true);
