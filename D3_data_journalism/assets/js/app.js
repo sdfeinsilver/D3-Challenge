@@ -1,7 +1,7 @@
 // Goal: Use the D3 Library to create a scatter plot examining the relationship between poverty level and healthcare
 
 // Set up Chart
-let svgWidth = 960;
+let svgWidth = 800;
 let svgHeight = 500;
 
 // Margin for SVG graphics
@@ -12,7 +12,7 @@ let margin = {
     left: 100
 };
 
-let width = svgWidth - margin.left - margin.right;
+let width = svgWidth - margin.left - margin.right -100;
 let height = svgHeight - margin.top - margin.bottom;
 
 // Create a SVG wrapper, append a SVG group that will hold our chart, and shift the SVG group by left and top margins
@@ -88,7 +88,8 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
             return d.abbr;
         })
         .attr("class", "stateAbbrText")
-        .attr("font-size", "10px");
+        .attr("font-size", "10px")
+        .attr("font-weight", "bold");
 
     // Initialize tool tip
     let toolTip = d3.select('body').append('div').classed('tooltip', true);
@@ -98,7 +99,6 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         toolTip.style('display', 'block')
             .html(`${d.state}`)
     })
-
 
     // Create Axes Labels
     chartGroup.append("text")
