@@ -91,15 +91,6 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         .attr("font-size", "10px")
         .attr("font-weight", "bold");
 
-    // Initialize tool tip
-    let toolTip = d3.select('body').append('div').classed('tooltip', true);
-
-    //Create event listeners to display and hide tooltop
-    circlesGroup.on("click", function(event, d) {
-        toolTip.style('display', 'block')
-            .html(`${d.state}`)
-    })
-
     // Create Axes Labels
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
@@ -107,12 +98,14 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("class", "axisText")
-        .text("Healthcare Level");
+        .text("Healthcare Level")
+        .attr("font-weight", "bold");
     
     chartGroup.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .attr("class", "axisText")
-        .text("Poverty Level"); 
+        .text("Poverty Level")
+        .attr("font-weight", "bold"); 
 }).catch(function(error) {
     console.log(error);
 });
