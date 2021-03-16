@@ -71,6 +71,56 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
     .attr("fill", "CadetBlue")
     .attr("opacity", "1");
 
+    // Test Code
+    var stateAbbr = chartGroup.selectAll(null)
+    .data(healthData)
+    .enter().append("text");
+
+  stateAbbr
+    .attr("x", function (d) {
+      return xLinearScale(d.poverty);
+    })
+    .attr("y", function (d) {
+      return yLinearScale(d.healthcare) + 3
+    })
+    .text(function (d) {
+      return d.abbr;
+    })
+    .attr("class", "stateText")
+    .attr("font-size", "9px");
+    
+    
+    
+    
+    // // Put State Abbreviations inside Scatter Plot points
+    // let stateAbbr = chartGroup.selectAll(null)
+    //     .data(healthData)
+    //     .enter()
+    //     .append('text');
+    
+    // stateAbbr
+    //     .attr('x', function (d) {
+    //         return xLinearScale(d.poverty);
+    //     })
+    //     .attr('y', function(d) {
+    //         return yLinearScale(d.healthcare);
+    //     })
+    //     .text(function (d) {
+    //         return d.abbr;
+    //     })
+    //     .attr("class", "stateAbbrText")
+    //     .attr("font-size", "15px");
+
+    // Initialize tool tip
+    let toolTip = d3.select('body').append('div').classed('tooltip', true);
+
+    //Create event listeners to display and hide tooltop
+    circlesGroup.on("click", function(event, d) {
+        toolTip.style('display', 'block')
+            .html(`${d.state}`)
+    })
+
+
     // Create Axes Labels
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
